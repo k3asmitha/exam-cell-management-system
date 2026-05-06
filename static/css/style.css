@@ -1,0 +1,45 @@
+:root {
+    --glass-bg: rgba(255, 255, 255, 0.9);
+    --primary: #4361ee;
+    --secondary: #3f37c9;
+    --success: #4cc9f0;
+}
+
+body {
+    background: #f0f2f5;
+    font-family: 'Inter', sans-serif;
+    color: #333;
+}
+
+.card {
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.navbar {
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid #ddd;
+}
+
+.btn-primary {
+    background: var(--primary);
+    border: none;
+    padding: 10px 25px;
+    border-radius: 10px;
+}
+
+.stat-value {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--primary);
+}
+
+.badge-fn { background: #e0f2fe; color: #0369a1; }
+.badge-an { background: #fef3c7; color: #92400e; }

@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-10">
+        <div class="card p-5 shadow-lg border-0">
+            <h2 class="fw-bold mb-4">Exam Configuration Module</h2>
+           
+            <form action="/create-exam" method="POST">
+                <div class="mb-4">
+                    <label class="form-label fw-bold">Exam Title</label>
+                    <input type="text" name="name" class="form-control form-control-lg" placeholder="e.g. Unit Test - CSE" required>
+                </div>
+
+                <div class="row g-3 mb-4">
+                    <div class="col-md-6">
+                        <label class="form-label">Exam Date (Start)</label>
+                        <input type="date" name="start_date" id="examDateInput" class="form-control" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">End Date</label>
+                        <input type="date" name="end_date" class="form-control" required>
+                    </div>
+                </div>
+
+                <div class="row g-3 mb-4">
+                    <div class="col-md-4">
+                        <label class="form-label">Slot</label>
+                        <select name="slot" class="form-select">
+                            <option value="FN">Forenoon (FN)</option>
+                            <option value="AN">Afternoon (AN)</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Branch</label>
+                        <select id="branchFilter" class="form-select">
+                            <option value="">Select Branch</option>
+                            {% for b in branches %}
+                            <option value="{{ b }}">{{ b }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Course</label>
+                        <select name="course_id" id="courseSelect" class="form-select" required>
+                            <option value="">-- Select Branch First --</option>
+                            {% for c in courses %}
+                            <option value="{{ c.id }}" data-branch="{{ c.branch }}" class="course-opt d-none">
+                                {{ c.course_code }} - {{ c.course_name }}
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Logic Output Box[cite: 10, 11] -->
+                <div id="logicInfo" class="alert alert-secondary d-none">
+                    <h6 class="fw-bold">Allocation Logic:</h6>
+                    <ul class="mb-0">
+                        <li>Registered Students: <span id="studentCount" class="fw-bold">0</span></li>
+                        <li>Rule: Allocating largest available rooms first to minimize total rooms used.</li>
+                    </ul>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-lg w-100 shadow mt-3">ALLOCATE ROOM AND FACULTY</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    // 1. Branch Filter Logic[cite: 10]
+    document.getElementById('branchFilter').addEventListener('change', function() {
+        const selectedBranch = this.value;
+        const courses = document.querySelectorAll('.course-opt');
+        courses.forEach(opt => {
+            opt.classList.toggle('d-none', opt.getAttribute('data-branch') !== selectedBranch);
+        });
+        document.getElementById('courseSelect').value = ""; 
+    });
+
+    // 2. Fetch and Display Registered Student Info[cite: 10, 11]
+    document.getElementById('courseSelect').addEventListener('change', function() {
+        const courseId = this.value;
+        const infoBox = document.getElementById('logicInfo');
+        const countSpan = document.getElementById('studentCount');
+       
+        if (courseId) {
+            fetch(`/get_course_details/${courseId}`)
+                .then(res => res.json())
+                .then(data => {
+                    infoBox.classList.remove('d-none');
+                    countSpan.innerText = data.student_count;
+                });
+        }
+    });
+</script>
+{% endblock %}

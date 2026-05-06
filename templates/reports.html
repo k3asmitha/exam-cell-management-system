@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="fw-bold">Allocation Logic Report</h2>
+    <button class="btn btn-dark" onclick="window.print()">Print Report</button>
+</div>
+
+<div class="card shadow-sm border-0">
+    <div class="table-responsive">
+        <table class="table table-hover align-middle mb-0">
+            <thead class="table-light">
+                <tr>
+                    <th>Exam & Date</th>
+                    <th>Room Allocated</th>
+                    <th>Faculty Assigned</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in data %}
+                <tr>
+                    <td>
+                        <div class="fw-bold">{{ row.exam_name }}</div>
+                        <small class="badge bg-primary">{{ row.exam_date }} ({{ row.slot }})</small>
+                    </td>
+                    <td>
+                        <span class="text-primary fw-bold">{{ row.room_name }}</span>
+                        <br><small class="text-muted">Cap: {{ row.capacity }}</small>
+                    </td>
+                    <td>{{ row.faculty_name }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
