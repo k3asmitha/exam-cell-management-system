@@ -1,10 +1,10 @@
-# 📘 Exam Cell Management System
+#  Exam Cell Management System
 
-## 🚀 Overview
+## Overview
 
 A web-based database application developed to automate the examination process, including exam scheduling, room allocation, and faculty invigilation assignment.
 
-## 🎯 Problem Solved
+## Problem Solved
 
 Manual exam planning is time-consuming and error-prone. This system ensures:
 
@@ -14,30 +14,30 @@ Manual exam planning is time-consuming and error-prone. This system ensures:
 
 ---
 
-## ⚙️ Features
+## Features
 
-### 📝 Exam Creation
+### Exam Creation
 
 * Create exams with date and slot (FN/AN)
 
-### 📚 Course Selection
+### Course Selection
 
 * Filter by branch
 * Automatically fetch registered student count
 
-### 🏫 Room Allocation
+### Room Allocation
 
 * Greedy algorithm (largest capacity first)
 * Ensures minimum number of rooms
 * Avoids duplicate room usage
 
-### 👨‍🏫 Faculty Allocation
+### Faculty Allocation
 
 * Assigns based on least assigned duties
 * Prevents same-slot conflicts
 * Respects maximum duty limits
 
-### 📊 Reports
+### Reports
 
 * Exam schedule
 * Room allocation
@@ -46,7 +46,7 @@ Manual exam planning is time-consuming and error-prone. This system ensures:
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 | Layer    | Technology           |
 | -------- | -------------------- |
@@ -56,7 +56,7 @@ Manual exam planning is time-consuming and error-prone. This system ensures:
 
 ---
 
-## 🧠 Core Logic
+## Core Logic
 
 ### Room Allocation
 
@@ -68,7 +68,7 @@ Faculty are assigned based on least assigned duties while ensuring no scheduling
 
 ---
 
-## 📂 Project Structure
+##  Project Structure
 
 ```text
 create-exam/
@@ -80,7 +80,7 @@ create-exam/
 
 ---
 
-## ▶️ How to Run
+## How to Run
 
 ```bash
 pip install -r requirements.txt
@@ -89,7 +89,3 @@ python app.py
 
 ---
 
-## 📌 Notes
-
-* Designed during a 4-hour hackathon
-* Focused on correctness, constraints, and optimization logic
