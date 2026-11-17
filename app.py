@@ -70,7 +70,7 @@ def create_exam():
                 SELECT id, room_name, capacity FROM rooms 
                 WHERE id NOT IN (
                     SELECT room_id FROM allocations a 
-                    JOIN rooms r ON a.room_id = r.id 
+                    JOIN rooms r ON a.room_id = r.id
                     WHERE e.exam_date = %s AND e.slot = %s
                 ) ORDER BY capacity DESC
             """, (start_date, slot))
